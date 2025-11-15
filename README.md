@@ -35,6 +35,7 @@ End Screen (after 60 seconds):
 
 📌 4. Frontend Layout Sketches
 Sketch 1 – Start Screen
+
 --------------------------------------------------------
 |               Turkish Cuisine GeoGame                |
 --------------------------------------------------------
@@ -49,6 +50,7 @@ Sketch 1 – Start Screen
 --------------------------------------------------------
 
 Sketch 2 – Game Screen
+
  -----------------------------------------------------
 |   Dish Image       |     Interactive Turkey Map     |
 |   (left panel)     |      (Leaflet + GeoJSON)       |
@@ -57,6 +59,7 @@ Sketch 2 – Game Screen
  -----------------------------------------------------
 
 Sketch 3 – End Screen
+
  -------------------------------
 |           GAME OVER           |
 |        Final Score: 23        |
