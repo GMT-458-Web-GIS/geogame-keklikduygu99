@@ -61,8 +61,11 @@ Top Bar:
 
 
 Sketch 3 – End Screen:
+
 GAME OVER
+
 Final Score: 23
+
 [ PLAY AGAIN BUTTON ]
 
 
