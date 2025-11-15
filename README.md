@@ -50,7 +50,6 @@ Sketch 1 – Start Screen
 |                       [ START ]                      |
 +------------------------------------------------------+
 
-
 Sketch 2 – Game Screen
 +--------------------------------------------------------------+
 |   Dish Image (Left Panel)    |   Interactive Turkey Map      |
@@ -59,7 +58,6 @@ Sketch 2 – Game Screen
 |   Time Left: 47 s            |            Score: 12          |
 +--------------------------------------------------------------+
 
-
 Sketch 3 – End Screen
 +------------------------------+
 |          GAME OVER           |
@@ -67,6 +65,7 @@ Sketch 3 – End Screen
 |                              |
 |        [ Play Again ]        |
 +------------------------------+
+
 
 
 
