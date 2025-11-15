@@ -36,34 +36,38 @@ End Screen (after 60 seconds):
 📌 4. Frontend Layout Sketches
 
 Sketch 1 – Start Screen
---------------------------------------------------------
-|               Turkish Cuisine GeoGame                |
---------------------------------------------------------
-|  Identify the Turkish city of the dish shown on      |
-|  the screen by clicking it on the map.               |
++------------------------------------------------------+
+|                Turkish Cuisine GeoGame               |
++------------------------------------------------------+
+|  Identify the origin city of the dish shown on the   |
+|  screen by clicking it on the map.                   |
 |                                                      |
-|  + Correct answer: +5 points                         |
-|  + Wrong answer: -1 point                            |
-|  + Time limit: 60 seconds                            |
+|  Rules:                                              |
+|   • Correct answer: +5 points                        |
+|   • Wrong answer: -1 point                           |
+|   • Time limit: 60 seconds                           |
 |                                                      |
-|                      [ START ]                       |
---------------------------------------------------------
+|                       [ START ]                      |
++------------------------------------------------------+
+
 
 Sketch 2 – Game Screen
- -----------------------------------------------------
-|   Dish Image       |     Interactive Turkey Map     |
-|   (left panel)     |      (Leaflet + GeoJSON)       |
- -----------------------------------------------------
-|  Time left: 47 s   |     Score: 12                  |
- -----------------------------------------------------
++--------------------------------------------------------------+
+|   Dish Image (Left Panel)    |   Interactive Turkey Map      |
+|                              |   (Leaflet + GeoJSON)         |
++--------------------------------------------------------------+
+|   Time Left: 47 s            |            Score: 12          |
++--------------------------------------------------------------+
+
 
 Sketch 3 – End Screen
- -------------------------------
-|           GAME OVER           |
-|        Final Score: 23        |
-|                               |
-|        [ Play Again ]         |
- -------------------------------
++------------------------------+
+|          GAME OVER           |
+|        Final Score: 23       |
+|                              |
+|        [ Play Again ]        |
++------------------------------+
+
 
 
 📌 5. Technical Requirements
