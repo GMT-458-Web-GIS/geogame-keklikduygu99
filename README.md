@@ -43,31 +43,26 @@ Description:
 - A dish image will be shown.
 - Click the correct city on the map.
 - Earn points and beat the timer!
-
 Rules:
 - Correct answer: +5 points
 - Wrong answer: -1 point
 - Time limit: 60 seconds
-
 [ START BUTTON ]
 
 
 Sketch 2 – Game Screen:
 Left Panel:
 - Dish image
-
 Right Panel:
 - Interactive Turkey map (Leaflet)
-
 Top Bar:
 - Time left: 47 s
 - Score: 12
 
-Sketch 3 – End Screen:
 
+Sketch 3 – End Screen:
 GAME OVER
 Final Score: 23
-
 [ PLAY AGAIN BUTTON ]
 
 
