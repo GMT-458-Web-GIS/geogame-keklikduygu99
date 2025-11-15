@@ -35,39 +35,41 @@ End Screen (after 60 seconds):
 
 📌 4. Frontend Layout Sketches
 
-Sketch 1 – Start Screen
+Sketch 1 – Start Screen:
 
-+------------------------------------------------------+
-|                Turkish Cuisine GeoGame               |
-+------------------------------------------------------+
-|  Identify the origin city of the dish shown on the   |
-|  screen by clicking it on the map.                   |
-|                                                      |
-|  Rules:                                              |
-|   • Correct answer: +5 points                        |
-|   • Wrong answer: -1 point                           |
-|   • Time limit: 60 seconds                           |
-|                                                      |
-|                       [ START ]                      |
-+------------------------------------------------------+
+Title: Turkish Cuisine GeoGame
 
-Sketch 2 – Game Screen
+Description:
+- A dish image will be shown.
+- Click the correct city on the map.
+- Earn points and beat the timer!
 
-+--------------------------------------------------------------+
-|   Dish Image (Left Panel)    |   Interactive Turkey Map      |
-|                              |   (Leaflet + GeoJSON)         |
-+--------------------------------------------------------------+
-|   Time Left: 47 s            |            Score: 12          |
-+--------------------------------------------------------------+
+Rules:
+- Correct answer: +5 points
+- Wrong answer: -1 point
+- Time limit: 60 seconds
 
-Sketch 3 – End Screen
+[ START BUTTON ]
 
-+------------------------------+
-|          GAME OVER           |
-|        Final Score: 23       |
-|                              |
-|        [ Play Again ]        |
-+------------------------------+
+
+Sketch 2 – Game Screen:
+Left Panel:
+- Dish image
+
+Right Panel:
+- Interactive Turkey map (Leaflet)
+
+Top Bar:
+- Time left: 47 s
+- Score: 12
+
+Sketch 3 – End Screen:
+
+GAME OVER
+Final Score: 23
+
+[ PLAY AGAIN BUTTON ]
+
 
 
 
