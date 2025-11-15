@@ -1,5 +1,6 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/BhShQpq1)
-GeoGame – Turkish Cuisine Location Game (Design Document)
+
+GeoGame – Turkish Cuisine Location Game 
+
 📌 1. Game Idea and Purpose
 This GeoGame is an interactive map-based quiz where the player identifies which Turkish city a displayed famous local dish belongs to.A random dish photo appears on the screen, and the player must click the correct city on the Turkey map.
 Goal: Score as many points as possible within 60 seconds.
