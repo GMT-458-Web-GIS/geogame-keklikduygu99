@@ -20,11 +20,16 @@ Goal: Score as many points as possible within 60 seconds.
 Start Screen:
 -Displays game instructions and rules.
 -User presses Start.
+<img width="1221" height="348" alt="baş" src="https://github.com/user-attachments/assets/2643a6c6-ecc9-4361-90d6-8e8cec6edf92" />
+
 
 Game Screen:
 -Left panel: Dish image
 -Right panel: Interactive Turkey map (Leaflet)
 -Top bar: Remaining time + Current score
+
+<img width="1230" height="756" alt="Ekran görüntüsü 2025-11-26 211414" src="https://github.com/user-attachments/assets/b110c153-a5c8-4d8f-9fd3-0f0f4a7bc80f" />
+
 
 Gameplay:
 -Player clicks a city to guess the origin of the dish.
@@ -49,8 +54,6 @@ Rules:
 - Correct answer: +5 points
 - Wrong answer: -1 point
 - Time limit: 60 seconds
-[ START BUTTON ]
-
 
 Sketch 2 – Game Screen:
 Left Panel:
@@ -67,7 +70,7 @@ Sketch 3 – End Screen:
 Final Score: 23
 [ PLAY AGAIN BUTTON ]
 
-
+<img width="1221" height="270" alt="son" src="https://github.com/user-attachments/assets/f398ae72-60b9-4ad2-b9c5-800c5bb2794d" />
 
 
 
