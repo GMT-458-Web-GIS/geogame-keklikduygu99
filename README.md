@@ -72,7 +72,7 @@ Final Score: 23
 📌 5. Technical Requirements
 JavaScript Library
 -Leaflet.js (for interactive map)
--GeoJSON file of Turkey’s 35 provinces will be used for click detection.
+-GeoJSON file of Turkey’s 81 provinces will be used for click detection.
 
 Data Requirements
 Each city will include:
