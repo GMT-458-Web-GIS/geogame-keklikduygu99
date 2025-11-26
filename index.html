@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GeoGame — Turkish Cuisine (35 Provinces)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Leaflet Map CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<style>
+body {
+  margin:0; padding:0;
+  font-family: Arial, sans-serif;
+  background:#0f1624; color:white;
+}
+.container {
+  width:90%; max-width:1100px; margin:auto; padding:20px;
+}
+h1 { margin-bottom:4px; }
+.small { color:#b7c7d9; font-size:14px; }
+
+.screen { display:none; text-align:center; margin-top:20px; }
+.screen.active { display:block; }
+
+button {
+  padding:10px 18px; border:none; border-radius:8px;
+  background:#00bcd4; font-weight:bold; cursor:pointer;
+}
+
+#map { height:480px; border-radius:10px; margin-top:20px; }
+
+.flex { display:flex; gap:20px; }
+.left { width:320px; }
+.right { flex:1; }
+
+#dishImg {
+  width:100%; max-height:250px; border-radius:6px; background:#1b2333;
+}
+#feedback { margin-top:6px; height:22px; font-size:14px; }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <h1>GeoGame – Turkish Cuisine</h1>
+  <div class="small">Guess the city of the dish. +5 correct / −1 wrong / 60 seconds.</div>
+  <div class="small">Time: <span id="timer">60</span> | Score: <span id="score">0</span></div>
+
+  <!-- START SCREEN -->
+  <div id="startScreen" class="screen active">
+    <h2>How to Play</h2>
+    <p class="small">A dish will appear. Click the correct city on the map.</p>
+    <button id="startBtn">Start Game</button>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="gameScreen" class="screen">
+    <div class="flex">
+      <div class="left">
+        <img id="dishImg" src="">
+        <h3 id="dishName"></h3>
+        <div id="feedback"></div>
+      </div>
+      <div class="right">
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCOREBOARD SCREEN -->
+  <div id="scoreScreen" class="screen">
+    <h2>Scoreboard</h2>
+    <p>Your score: <strong id="finalScore">0</strong></p>
+    <button id="playAgain">Play Again</button>
+  </div>
+
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+// --------------------------
+// DATA — 35 PROVINCES
+// --------------------------
+const CITIES = [
+  {city:"Istanbul",lat:41.0082,lng:28.9784,dish:"İstanbul Spesiyalleri"},
+  {city:"Izmir",lat:38.42,lng:27.14,dish:"Boyoz"},
+  {city:"Ankara",lat:39.93,lng:32.85,dish:"Beypazarı Kurusu"},
+  {city:"Antalya",lat:36.88,lng:30.70,dish:"Piyaz"},
+  {city:"Bursa",lat:40.19,lng:29.06,dish:"İskender"},
+  {city:"Adana",lat:37.0,lng:35.32,dish:"Adana Kebap"},
+  {city:"Gaziantep",lat:37.06,lng:37.38,dish:"Baklava"},
+  {city:"Mersin",lat:36.81,lng:34.64,dish:"Tantuni"},
+  {city:"Hatay",lat:36.20,lng:36.17,dish:"Künefe"},
+  {city:"Konya",lat:37.87,lng:32.49,dish:"Etli Ekmek"},
+  {city:"Kayseri",lat:38.73,lng:35.48,dish:"Mantı"},
+  {city:"Samsun",lat:41.28,lng:36.33,dish:"Samsun Pide"},
+  {city:"Trabzon",lat:41.0,lng:39.71,dish:"Akçaabat Köfte"},
+  {city:"Rize",lat:41.02,lng:40.52,dish:"Laz Böreği"},
+  {city:"Ordu",lat:40.98,lng:37.87,dish:"Hamsi"},
+  {city:"Aydın",lat:37.84,lng:27.83,dish:"İncir Tatlısı"},
+  {city:"Manisa",lat:38.61,lng:27.42,dish:"Mesir"},
+  {city:"Bolu",lat:40.73,lng:31.61,dish:"Bolu Köftesi"},
+  {city:"Çanakkale",lat:40.15,lng:26.41,dish:"Peynir Helvası"},
+  {city:"Çorum",lat:40.54,lng:34.95,dish:"İskilip Dolması"},
+  {city:"Denizli",lat:37.77,lng:29.08,dish:"Kuzu Tandır"},
+  {city:"Diyarbakır",lat:37.91,lng:40.23,dish:"Kaburga Dolması"},
+  {city:"Elazığ",lat:38.67,lng:39.22,dish:"Harput Köftesi"},
+  {city:"Erzurum",lat:39.90,lng:41.26,dish:"Cağ Kebabı"},
+  {city:"Eskişehir",lat:39.76,lng:30.52,dish:"Çibörek"},
+  {city:"K.Maraş",lat:37.58,lng:36.93,dish:"Maraş Dondurması"},
+  {city:"Malatya",lat:38.35,lng:38.30,dish:"Kayısı Tatlısı"},
+  {city:"Sivas",lat:39.74,lng:37.01,dish:"Kangal Sucuk"},
+  {city:"Şanlıurfa",lat:37.16,lng:38.79,dish:"Lahmacun"},
+  {city:"Uşak",lat:38.68,lng:29.40,dish:"Uşak Köftesi"},
+  {city:"Van",lat:38.50,lng:43.41,dish:"Otlu Peynir"},
+];
+
+// --------------------------
+// GAME STATE
+// --------------------------
+let score = 0;
+let time = 60;
+let timerInterval = null;
+let currentIndex = null;
+
+// DOM
+const startScreen = document.getElementById("startScreen");
+const gameScreen  = document.getElementById("gameScreen");
+const scoreScreen = document.getElementById("scoreScreen");
+
+const dishImg  = document.getElementById("dishImg");
+const dishName = document.getElementById("dishName");
+const feedback = document.getElementById("feedback");
+
+const timerEl = document.getElementById("timer");
+const scoreEl = document.getElementById("score");
+const finalScore = document.getElementById("finalScore");
+
+// --------------------------
+// MAP
+// --------------------------
+const map = L.map("map").setView([39, 35], 5);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+
+let markers = [];
+
+function placeMarkers() {
+  markers.forEach(m => map.removeLayer(m));
+  markers = [];
+
+  CITIES.forEach((c, i) => {
+    const marker = L.circleMarker([c.lat, c.lng], {
+      radius:6, color:"#00bcd4", fillColor:"#00bcd4", fillOpacity:0.9
+    })
+    .addTo(map)
+    .bindTooltip(c.city);
+
+    marker.index = i;
+    marker.on("click", () => handleGuess(i));
+
+    markers.push(marker);
+  });
+}
+
+// --------------------------
+// GAME LOGIC
+// --------------------------
+function startGame() {
+  score = 0;
+  time = 60;
+  scoreEl.textContent = score;
+  timerEl.textContent = time;
+
+  startScreen.classList.remove("active");
+  scoreScreen.classList.remove("active");
+  gameScreen.classList.add("active");
+
+  placeMarkers();
+  nextQuestion();
+
+  timerInterval = setInterval(() => {
+    time--;
+    timerEl.textContent = time;
+    if (time <= 0) endGame();
+  }, 1000);
+}
+
+function endGame() {
+  clearInterval(timerInterval);
+  gameScreen.classList.remove("active");
+  scoreScreen.classList.add("active");
+  finalScore.textContent = score;
+}
+
+function nextQuestion() {
+  currentIndex = Math.floor(Math.random() * CITIES.length);
+  let item = CITIES[currentIndex];
+
+  dishImg.src = "";
+  dishImg.onerror = () => {
+    dishImg.src = createSVG(item.dish);
+  };
+  dishName.textContent = item.dish;
+  feedback.textContent = "";
+}
+
+function handleGuess(i) {
+  if (i === currentIndex) {
+    score += 5;
+    feedback.style.color = "#7CFFBE";
+    feedback.textContent = "Correct! +5";
+  } else {
+    score -= 1;
+    feedback.style.color = "#ff8c8c";
+    feedback.textContent = "Wrong! -1 (Correct: " + CITIES[currentIndex].city + ")";
+  }
+  scoreEl.textContent = score;
+
+  setTimeout(nextQuestion, 600);
+}
+
+// SVG placeholder image
+function createSVG(text) {
+  const svg = `
+  <svg width='600' height='300' xmlns='http://www.w3.org/2000/svg'>
+    <rect width='100%' height='100%' fill='#162235'/>
+    <text x='50%' y='50%' fill='white' font-size='24' text-anchor='middle' dominant-baseline='middle'>
+      ${text}
+    </text>
+  </svg>`;
+  return "data:image/svg+xml;base64," + btoa(svg);
+}
+
+// Buttons
+document.getElementById("startBtn").onclick = startGame;
+document.getElementById("playAgain").onclick = startGame;
+</script>
+
+</body>
+</html>
