@@ -90,50 +90,5 @@ The player answers as many questions as possible within 60 seconds.
 There is no fixed number of questions.
 The total depends on how fast the user answers—typically 10–15 questions within one minute.
 
-📌 Full Game Flow Diagram
 
-flowchart TB
-
-%% START SCREEN %%
-
-A1([Start Screen]) --> A2[Show Game Title]
-A2 --> A3[Show Description and Rules]
-A3 --> A4[START Button Clicked]
-
-%% GAME INITIALIZATION %%
-
-A4 --> B1[Initialize Game]
-B1 --> B2[Set Score = 0]
-B2 --> B3[Set Time = 60 sec]
-B3 --> B4[Load Turkey GeoJSON]
-B4 --> B5[Load Food Dataset (City → Dish Image)]
-B5 --> B6[Display Game Screen]
-
-%% GAME LOOP %%
-
-B6 --> C1{Time > 0?}
-
-C1 -- Yes --> C2[Select Random City]
-C2 --> C3[Show Dish Image in Left Panel]
-C3 --> C4[Wait For Player to Click a City on Map]
-
-%% PLAYER GUESS LOGIC %%
-
-C4 --> D1{Clicked City == Correct City?}
-
-D1 -- Yes --> D2[+5 Points]
-D2 --> D4[Show “Correct!” Feedback]
-D4 --> C1
-
-D1 -- No --> D3[-1 Point]
-D3 --> D5[Show “Wrong!” Feedback]
-D5 --> C1
-
-%% TIME RUNS OUT %%
-
-C1 -- No --> E1([End Screen])
-E1 --> E2[Show Final Score]
-E2 --> E3[Show “Play Again” Button]
-
-E3 --> A1
 
